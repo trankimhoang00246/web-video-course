@@ -1,5 +1,6 @@
 package com.codejava.course.model.entity;
 
+import com.codejava.course.model.entity.course.Course;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -25,6 +27,9 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String name;
+
+    @ManyToMany(mappedBy = "userSet", fetch = FetchType.LAZY)
+    private Set<Course> courseSet;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Role role;
