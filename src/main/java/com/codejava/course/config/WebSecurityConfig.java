@@ -43,7 +43,8 @@ public class WebSecurityConfig {
                                         "/api/v1/auth/**",
                                         "/api/v1/course/**",
                                         "/api/v1/lesson/**",
-                                        "/api/v1/type-lesson/**",
+                                        "/api/v1/category/**",
+                                        "/api/v1/comment/**",
                                         "/error").anonymous()
                                 .requestMatchers("/v3/api-docs/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()

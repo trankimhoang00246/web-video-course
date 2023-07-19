@@ -1,7 +1,7 @@
 package com.codejava.course.model.entity.course.lesson;
 
 import com.codejava.course.model.entity.course.AbstractLesson;
-import com.codejava.course.model.entity.course.TypeLesson;
+import com.codejava.course.model.entity.CategoryBase;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,7 +21,7 @@ public class Text extends AbstractLesson {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id")
-    private TypeLesson typeLesson;
+    private CategoryBase categoryBase;
 
     @Override
     public Long getLessonId() {
@@ -30,7 +30,7 @@ public class Text extends AbstractLesson {
 
     @Override
     public Long getTypeId() {
-        return typeLesson.getId();
+        return categoryBase.getId();
     }
 
     @Override

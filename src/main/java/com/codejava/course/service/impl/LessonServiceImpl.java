@@ -3,7 +3,7 @@ package com.codejava.course.service.impl;
 import com.codejava.course.model.dto.LessonDto;
 import com.codejava.course.model.entity.course.Course;
 import com.codejava.course.model.entity.course.Lesson;
-import com.codejava.course.model.entity.course.TypeLesson;
+import com.codejava.course.model.entity.CategoryBase;
 import com.codejava.course.model.entity.course.lesson.Text;
 import com.codejava.course.model.entity.course.lesson.Video;
 import com.codejava.course.model.form.lesson.Base;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 public record LessonServiceImpl(
         LessonRepository lessonRepository,
-        TypeLessonRepository typeLessonRepository,
+        CategoryBaseRepository categoryBaseRepository,
         TextRepository textRepository,
         VideoRepository videoRepository,
         CourseRepository courseRepository) implements LessonService {
@@ -82,13 +82,13 @@ public record LessonServiceImpl(
     }
 
     private Long saveTextLesson(LessonTextForm lessonForm) {
-        TypeLesson typeLesson = typeLessonRepository.findById(lessonForm.getTypeId())
+        CategoryBase categoryBase = categoryBaseRepository.findById(lessonForm.getTypeId())
                 .orElseThrow(() -> new NotFoundException("Type lesson not found with id " + lessonForm.getTypeId()));
 
         var text = Text.builder()
                 .title(lessonForm.getTitle())
                 .content(lessonForm.getContent())
-                .typeLesson(typeLesson)
+                .categoryBase(categoryBase)
                 .build();
         Text text1 = textRepository.save(text);
 
@@ -97,14 +97,14 @@ public record LessonServiceImpl(
 
 
     private Long saveVideoLesson(LessonVideoForm lessonForm) {
-        TypeLesson typeLesson = typeLessonRepository.findById(lessonForm.getTypeId())
+        CategoryBase categoryBase = categoryBaseRepository.findById(lessonForm.getTypeId())
                 .orElseThrow(() -> new NotFoundException("Type lesson not found with id " + lessonForm.getTypeId()));
 
         var video = Video.builder()
                 .title(lessonForm.getTitle())
                 .url("http://link.com")
                 .duration(30)
-                .typeLesson(typeLesson) //seconds
+                .categoryBase(categoryBase) //seconds
                 .build();
         Video video1 = videoRepository.save(video);
 

@@ -35,6 +35,8 @@ public class Course {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "course")
     private List<Lesson> lessonSet;
 
+
+
     public void setPriceAfterDiscount(DiscountStrategy discountStrategy) {
         this.salePrice = discountStrategy.doDiscount(this.price);
     }

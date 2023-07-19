@@ -1,5 +1,6 @@
 package com.codejava.course.model.entity.course;
 
+
 public abstract class AbstractLesson implements LessonStrategy{
     @Override
     public Long getLessonId() {
